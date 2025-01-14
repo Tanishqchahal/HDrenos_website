@@ -1,11 +1,13 @@
 import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 interface Service {
   title: string;
   description: string;
   image: string;
   link: string;
+  id: string;
 }
 
 const services: Service[] = [
@@ -13,39 +15,47 @@ const services: Service[] = [
     title: "Custom Home Renovations",
     description: "Complete home transformation services tailored to your vision and lifestyle needs.",
     image: "/services/custom-home.jpg",
-    link: "#custom-home"
+    link: "#custom-home",
+    id: "custom-home"
   },
   {
     title: "Kitchen Renovations",
     description: "Modern kitchen designs with premium materials and expert craftsmanship.",
     image: "/services/kitchen.jpg",
-    link: "#kitchen"
+    link: "#kitchen",
+    id: "kitchen"
   },
   {
     title: "Bathroom Renovations",
     description: "Luxury bathroom upgrades that combine style with functionality.",
     image: "/services/bathroom.jpg",
-    link: "#bathroom"
+    link: "#bathroom",
+    id: "bathroom"
   },
   {
     title: "Custom Builds",
     description: "From concept to completion, we bring your dream home to life.",
     image: "/services/custom-builds.jpg",
-    link: "#custom-builds"
+    link: "#custom-builds",
+    id: "custom-builds"
   },
   {
     title: "Home Additions",
     description: "Expand your living space with seamlessly integrated home additions.",
     image: "/services/additions.jpg",
-    link: "#additions"
+    link: "#additions",
+    id: "additions"
   },
   {
     title: "Commercial Renovations",
     description: "Professional renovations for businesses and commercial spaces.",
     image: "/services/commercial.jpg",
-    link: "#commercial"
+    link: "#commercial",
+    id: "commercial"
   }
 ];
+
+const MotionLink = motion(Link);
 
 const Services = () => {
   const containerVariants = {
@@ -120,9 +130,9 @@ const Services = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           {services.map((service, index) => (
-            <motion.a
+            <MotionLink 
               key={index}
-              href={service.link}
+              to={`/services/${service.id}`}
               className="group relative overflow-hidden rounded-lg aspect-[4/3] block"
               variants={itemVariants}
               whileHover={{ 
@@ -173,26 +183,8 @@ const Services = () => {
                   </motion.div>
                 </div>
               </div>
-            </motion.a>
+            </MotionLink>
           ))}
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-        >
-          <motion.button 
-            className="bg-[#ff0022] hover:bg-[#cc001b] text-white px-8 py-4 rounded-md text-lg font-semibold 
-              transition-colors duration-300 hover:shadow-[0_0_30px_rgba(255,0,34,0.3)]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            VIEW ALL SERVICES
-          </motion.button>
         </motion.div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface FAQItem {
   question: string;
@@ -127,7 +128,9 @@ const FAQ = () => {
             className="bg-[#ff0022] hover:bg-[#cc001b] text-white px-8 py-4 rounded-md text-lg font-semibold 
               transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,0,34,0.3)]"
           >
+            <Link to="/contact">
             CONTACT US
+            </Link>
           </motion.button>
         </motion.div>
       </div>

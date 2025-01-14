@@ -1,5 +1,6 @@
 import { FormInput, Paintbrush, Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Steps = () => {
   const containerVariants = {
@@ -143,7 +144,9 @@ const Steps = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
+            <Link to="/contact">
             BOOK AN APPOINTMENT
+            </Link>
           </motion.button>
         </motion.div>
       </div>

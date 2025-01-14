@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { Calendar } from 'lucide-react';
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 const ContactPage = () => {
   const projectTypes = [
@@ -35,6 +36,65 @@ const ContactPage = () => {
     "Previous Client",
     "Other"
   ];
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    projectType: '',
+    budget: '',
+    referralSource: '',
+    message: '',
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      await emailjs.send(
+        'service_42x4klq',
+        'template_f0428gl',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          project_type: formData.projectType,
+          budget: formData.budget,
+          referral_source: formData.referralSource,
+          message: formData.message,
+        },
+        '-6LM7w9z4Btu6zv-C'
+      );
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        projectType: '',
+        budget: '',
+        referralSource: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Email send failed:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
 
   return (
     <div className="pt-28 px-4 bg-black min-h-screen">
@@ -107,39 +167,19 @@ const ContactPage = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <form className="space-y-6 bg-gray-900/50 p-8 rounded-lg">
-              {/* Date Input */}
-              <div>
-                <label htmlFor="date" className="block text-white mb-2">Today's Date</label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    id="date"
-                    className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white pr-10"
-                  />
-                  <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                </div>
-              </div>
-
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Input */}
               <div>
-                <label htmlFor="name" className="block text-white mb-2">Full Name</label>
+                <label htmlFor="name" className="block text-white mb-2">Name</label>
                 <input
                   type="text"
                   id="name"
-                  className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white"
-                  placeholder="John Doe"
-                />
-              </div>
-
-              {/* Phone Input */}
-              <div>
-                <label htmlFor="phone" className="block text-white mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white"
-                  placeholder="(123) 456-7890"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-md 
+                    text-white focus:outline-none focus:ring-2 focus:ring-[#ff0022]"
                 />
               </div>
 
@@ -149,71 +189,60 @@ const ContactPage = () => {
                 <input
                   type="email"
                   id="email"
-                  className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white"
-                  placeholder="john@example.com"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-md 
+                    text-white focus:outline-none focus:ring-2 focus:ring-[#ff0022]"
                 />
               </div>
 
-              {/* Project Address */}
+              {/* Phone Input */}
               <div>
-                <label htmlFor="address" className="block text-white mb-2">Project Address</label>
+                <label htmlFor="phone" className="block text-white mb-2">Phone</label>
                 <input
-                  type="text"
-                  id="address"
-                  className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white"
-                  placeholder="123 Main St, City, Province"
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-md 
+                    text-white focus:outline-none focus:ring-2 focus:ring-[#ff0022]"
                 />
               </div>
 
-              {/* Project Type Checkboxes */}
+              {/* Project Type Select */}
               <div>
-                <label className="block text-white mb-3">Project Type</label>
-                <div className="grid grid-cols-2 gap-4">
+                <label htmlFor="projectType" className="block text-white mb-2">Project Type</label>
+                <select
+                  id="projectType"
+                  name="projectType"
+                  value={formData.projectType}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-md 
+                    text-white focus:outline-none focus:ring-2 focus:ring-[#ff0022]"
+                >
+                  <option value="">Select a project type</option>
                   {projectTypes.map((type) => (
-                    <label key={type} className="flex items-center space-x-2 text-gray-400">
-                      <input
-                        type="checkbox"
-                        name="project-type"
-                        value={type}
-                        className="form-checkbox text-[#ff0022] rounded border-gray-800 bg-black"
-                      />
-                      <span>{type}</span>
-                    </label>
+                    <option key={type} value={type}>{type}</option>
                   ))}
-                </div>
+                </select>
               </div>
 
-              {/* Project Details */}
-              <div>
-                <label htmlFor="details" className="block text-white mb-2">Project Details</label>
-                <textarea
-                  id="details"
-                  rows={4}
-                  className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white"
-                  placeholder="Please describe your project..."
-                ></textarea>
-              </div>
-
-              {/* Project Pictures */}
-              <div>
-                <label htmlFor="pictures" className="block text-white mb-2">Project Pictures</label>
-                <input
-                  type="file"
-                  id="pictures"
-                  multiple
-                  accept="image/*"
-                  className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white file:mr-4 
-                    file:py-2 file:px-4 file:rounded-md file:border-0 file:text-white file:bg-[#ff0022]
-                    hover:file:bg-[#cc001b]"
-                />
-              </div>
-
-              {/* Budget Range */}
+              {/* Budget Select */}
               <div>
                 <label htmlFor="budget" className="block text-white mb-2">Budget Range</label>
                 <select
                   id="budget"
-                  className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white"
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-md 
+                    text-white focus:outline-none focus:ring-2 focus:ring-[#ff0022]"
                 >
                   <option value="">Select a budget range</option>
                   {budgetRanges.map((range) => (
@@ -222,30 +251,72 @@ const ContactPage = () => {
                 </select>
               </div>
 
-              {/* Referral Source */}
+              {/* Referral Source Select */}
               <div>
-                <label htmlFor="referral" className="block text-white mb-2">How did you hear about us?</label>
+                <label htmlFor="referralSource" className="block text-white mb-2">How did you hear about us?</label>
                 <select
-                  id="referral"
-                  className="w-full px-4 py-3 bg-black border border-gray-800 rounded-md text-white"
+                  id="referralSource"
+                  name="referralSource"
+                  value={formData.referralSource}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-md 
+                    text-white focus:outline-none focus:ring-2 focus:ring-[#ff0022]"
                 >
-                  <option value="">Select an option</option>
+                  <option value="">Select a referral source</option>
                   {referralSources.map((source) => (
                     <option key={source} value={source}>{source}</option>
                   ))}
                 </select>
               </div>
 
+              {/* Message Textarea */}
+              <div>
+                <label htmlFor="message" className="block text-white mb-2">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-md 
+                    text-white focus:outline-none focus:ring-2 focus:ring-[#ff0022]"
+                />
+              </div>
+
               {/* Submit Button */}
               <motion.button
                 type="submit"
-                className="w-full bg-[#ff0022] hover:bg-[#cc001b] text-white px-8 py-4 rounded-md text-lg font-semibold 
-                  transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,0,34,0.3)]"
+                disabled={isSubmitting}
+                className="w-full bg-[#ff0022] hover:bg-[#cc001b] text-white px-8 py-4 rounded-md 
+                  text-lg font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,0,34,0.3)]
+                  disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Submit Request
+                {isSubmitting ? 'Sending...' : 'Submit Request'}
               </motion.button>
+
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-green-500 text-center mt-4"
+                >
+                  Thank you! We'll get back to you soon.
+                </motion.p>
+              )}
+
+              {submitStatus === 'error' && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-red-500 text-center mt-4"
+                >
+                  Something went wrong. Please try again later.
+                </motion.p>
+              )}
             </form>
           </motion.div>
         </div>

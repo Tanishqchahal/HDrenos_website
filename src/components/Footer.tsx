@@ -34,12 +34,12 @@ const Footer = () => {
   ];
 
   const services = [
-    { name: "Custom Home Renovations", path: "/services#custom-home" },
-    { name: "Kitchen Renovations", path: "/services#kitchen" },
-    { name: "Bathroom Renovations", path: "/services#bathroom" },
-    { name: "Custom Builds", path: "/services#custom-builds" },
-    { name: "Home Additions", path: "/services#additions" },
-    { name: "Commercial Renovations", path: "/services#commercial" }
+    { name: "Custom Home Renovations", path: "/services/custom-home" },
+    { name: "Kitchen Renovations", path: "/services/kitchen" },
+    { name: "Bathroom Renovations", path: "/services/bathroom" },
+    { name: "Custom Builds", path: "/services/custom-builds" },
+    { name: "Home Additions", path: "/services/additions" },
+    { name: "Commercial Renovations", path: "/services/commercial" }
   ];
 
   const socialLinks = [

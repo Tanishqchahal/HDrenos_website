@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Testimonial {
   id: number;
@@ -94,11 +94,57 @@ const testimonials: Testimonial[] = [
   }
 ];
 
+const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className="bg-gray-900/50 rounded-lg p-6 backdrop-blur-sm border border-gray-800"
+  >
+    <div className="flex mb-3">
+      {[...Array(testimonial.rating)].map((_, i) => (
+        <Star
+          key={i}
+          className="w-4 h-4 fill-[#ff0022] text-[#ff0022]"
+        />
+      ))}
+    </div>
+
+    <h3 className="text-lg font-bold text-white mb-3">
+      "{testimonial.title}"
+    </h3>
+
+    <p className="text-gray-400 text-sm mb-4 leading-relaxed line-clamp-3">
+      {testimonial.content}
+    </p>
+
+    <div>
+      <p className="text-white font-semibold text-sm">
+        {testimonial.author}
+      </p>
+      <p className="text-gray-500 text-sm">
+        {testimonial.position}
+      </p>
+    </div>
+  </motion.div>
+);
+
 const TestimonialsPage = () => {
   const [position, setPosition] = useState(-300);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const interval = setInterval(() => {
       setPosition(prev => {
         if (Math.abs(prev) > 10000) {
@@ -109,7 +155,7 @@ const TestimonialsPage = () => {
     }, 20);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
 
   const columns = [
     [...testimonials.slice(0, 4), ...testimonials.slice(0, 4)],
@@ -134,59 +180,39 @@ const TestimonialsPage = () => {
           </p>
         </motion.div>
 
-        <div className="relative h-[600px]" ref={containerRef}>
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10" />
-          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
-            {columns.map((column, columnIndex) => (
-              <div key={columnIndex} className="relative overflow-hidden h-full">
-                <div
-                  className="absolute w-full transition-transform duration-[2000ms] ease-linear"
-                  style={{
-                    transform: `translateY(${position * (columnIndex % 2 === 0 ? 1 : 1.2)}px)`,
-                  }}
-                >
-                  {column.map((testimonial, index) => (
-                    <motion.div
-                      key={`${testimonial.id}-${index}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                      className="bg-gray-900/50 rounded-lg p-6 backdrop-blur-sm border border-gray-800 mb-6"
-                    >
-                      <div className="flex mb-3">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className="w-4 h-4 fill-[#ff0022] text-[#ff0022]"
-                          />
-                        ))}
-                      </div>
-
-                      <h3 className="text-lg font-bold text-white mb-3">
-                        "{testimonial.title}"
-                      </h3>
-
-                      <p className="text-gray-400 text-sm mb-4 leading-relaxed line-clamp-3">
-                        {testimonial.content}
-                      </p>
-
-                      <div>
-                        <p className="text-white font-semibold text-sm">
-                          {testimonial.author}
-                        </p>
-                        <p className="text-gray-500 text-sm">
-                          {testimonial.position}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+        {isMobile ? (
+          // Static grid for mobile
+          <div className="grid grid-cols-1 gap-6 pb-12">
+            {testimonials.map((testimonial) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
             ))}
           </div>
-        </div>
+        ) : (
+          // Animated columns for desktop
+          <div className="relative h-[600px]">
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10" />
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10" />
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
+              {columns.map((column, columnIndex) => (
+                <div key={columnIndex} className="relative overflow-hidden h-full">
+                  <div
+                    className="absolute w-full transition-transform duration-[2000ms] ease-linear"
+                    style={{
+                      transform: `translateY(${position * (columnIndex % 2 === 0 ? 1 : 1.2)}px)`,
+                    }}
+                  >
+                    {column.map((testimonial, index) => (
+                      <div key={`${testimonial.id}-${index}`} className="mb-6">
+                        <TestimonialCard testimonial={testimonial} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
