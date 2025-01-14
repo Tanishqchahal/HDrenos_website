@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,6 +14,14 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Services', path: '/services' },
+    { name: 'Testimonials', path: '/testimonials' },
+    { name: 'Contact', path: '/contact' }
+  ];
 
   return (
     <header 
@@ -22,30 +32,34 @@ const Header = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24">
-          {/* Logo section */}
-          <div className="flex items-center">
+        <div className="flex justify-between items-center h-28">
+          <Link to="/" className="flex items-center">
             <img 
               src="/logo.png" 
-              alt="RenovatePro Logo" 
-              className="h-20 w-auto object-contain" 
+              alt="House of Detailed Renovations Logo" 
+              className="h-24 w-auto object-contain" 
             />
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-10">
-            {['Home', 'About Us', 'Services', 'Portfolio', 'Testimonials', 'Contact Us'].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(' ', '-')}`}
-                className="text-white text-base font-medium hover:text-[#ff0022] transition-colors duration-200"
+          <nav className="hidden md:flex items-center space-x-12">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`text-base font-medium transition-colors duration-200
+                  ${location.pathname === item.path ? 'text-[#ff0022]' : 'text-white hover:text-[#ff0022]'}`}
               >
-                {item}
-              </a>
+                {item.name}
+              </Link>
             ))}
-            <button className="bg-[#ff0022] text-white px-8 py-3 rounded-md hover:bg-[#cc001b] transition-all duration-200 font-medium text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+            <Link
+              to="/contact"
+              className="bg-[#ff0022] text-white px-8 py-3 rounded-md hover:bg-[#cc001b] transition-all duration-200 
+                font-medium text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            >
               Get a Quote
-            </button>
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -63,24 +77,27 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden absolute left-0 right-0 top-full">
-            <div className="px-2 pt-2 pb-3 space-y-2 bg-black/95 backdrop-blur-sm shadow-lg">
-              {['Home', 'About Us', 'Services', 'Portfolio', 'Testimonials', 'Contact Us'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
-                  className="block text-white hover:text-[#ff0022] px-4 py-3 transition-colors text-base font-medium"
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-black/95 backdrop-blur-sm shadow-lg">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className={`block px-4 py-3 text-base font-medium transition-colors
+                    ${location.pathname === item.path ? 'text-[#ff0022]' : 'text-white hover:text-[#ff0022]'}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item}
-                </a>
+                  {item.name}
+                </Link>
               ))}
               <div className="px-3 py-3">
-                <button
-                  className="w-full text-center bg-[#ff0022] text-white px-8 py-3 rounded-md hover:bg-[#cc001b] transition-all duration-200 font-medium text-base shadow-md"
+                <Link
+                  to="/contact"
+                  className="block w-full text-center bg-[#ff0022] text-white px-8 py-3 rounded-md hover:bg-[#cc001b] 
+                    transition-all duration-200 font-medium text-base shadow-md"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Get a Quote
-                </button>
+                </Link>
               </div>
             </div>
           </div>
