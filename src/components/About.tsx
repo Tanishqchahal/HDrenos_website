@@ -117,12 +117,16 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="absolute -bottom-6 -right-6 bg-[#ff0022] p-6 rounded-lg shadow-2xl md:w-72
+              className="absolute 
+                -bottom-8 right-2 
+                w-[calc(80%-1rem)] 
+                md:-bottom-10 md:-right-10 md:w-72
+                bg-[#ff0022] p-3 md:p-6 rounded-lg shadow-2xl
                 transform hover:scale-105 transition-transform duration-300"
             >
               <div className="text-white">
-                <div className="text-5xl font-bold mb-2">20+</div>
-                <div className="text-sm opacity-90 font-medium">
+                <div className="text-3xl md:text-5xl font-bold mb-2">20+</div>
+                <div className="text-[11px] md:text-sm opacity-90 font-medium">
                   Years of Excellence in Home Renovation
                 </div>
               </div>

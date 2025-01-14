@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface SlideData {
   image: string;
@@ -33,11 +34,10 @@ const slides: SlideData[] = [
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Auto-advance slides
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
@@ -55,64 +55,75 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-[100svh] w-full overflow-hidden">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
             index === currentSlide ? 'opacity-100' : 'opacity-0'
           }`}
         >
           {/* Image with overlay */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
           <img
             src={slide.image}
             alt={slide.title}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
           />
           
           {/* Text Content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-center mb-6 animate-fadeIn">
-              {slide.title}
-            </h1>
-            <p className="text-xl md:text-2xl text-center max-w-3xl animate-fadeIn">
-              {slide.description}
-            </p>
-            <button className="mt-8 px-8 py-3 bg-[#ff0022] text-white rounded-md hover:bg-[#cc001b] transition-all duration-200 text-lg font-medium animate-fadeIn">
-              Get Started
-            </button>
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 sm:px-4">
+            <div className="w-full max-w-3xl mx-auto">
+              <h1 className="text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-6 
+                leading-tight text-white animate-fadeIn">
+                {slide.title}
+              </h1>
+              <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl 
+                leading-relaxed mb-8 animate-fadeIn">
+                {slide.description}
+              </p>
+              <Link to="/contact">
+                <button className="bg-[#ff0022] text-white px-8 py-3 rounded-md text-base font-medium
+                  hover:bg-[#cc001b] transition-all duration-200 animate-fadeIn">
+                  Get Started
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       ))}
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 rounded-full text-white transition-all"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="h-8 w-8" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 rounded-full text-white transition-all"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="h-8 w-8" />
-      </button>
+      {/* Navigation Arrows - Hidden on mobile */}
+      <div className="hidden sm:block">
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 
+            rounded-full text-white transition-all"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 
+            rounded-full text-white transition-all"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+        </button>
+      </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-3">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
+            className={`h-2 rounded-full transition-all ${
               index === currentSlide
-                ? 'bg-white w-8'
-                : 'bg-white/50 hover:bg-white/75'
+                ? 'bg-white w-6'
+                : 'bg-white/50 w-2 hover:bg-white/75'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
