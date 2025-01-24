@@ -76,16 +76,16 @@ const Hero = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 sm:px-4">
             <div className="w-full max-w-3xl mx-auto">
               <h1 className="text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-6 
-                leading-tight text-white animate-fadeIn">
+                leading-tight text-white animate-fadeIn text-center">
                 {slide.title}
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl 
-                leading-relaxed mb-8 animate-fadeIn">
+                leading-relaxed mb-8 animate-fadeIn mx-auto text-center">
                 {slide.description}
               </p>
               <Link to="/contact">
                 <button className="bg-[#ff0022] text-white px-8 py-3 rounded-md text-base font-medium
-                  hover:bg-[#cc001b] transition-all duration-200 animate-fadeIn">
+                  hover:bg-[#cc001b] transition-all duration-200 animate-fadeIn mx-auto block">
                   Get Started
                 </button>
               </Link>
