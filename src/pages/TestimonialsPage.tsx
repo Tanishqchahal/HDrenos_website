@@ -8,89 +8,78 @@ interface Testimonial {
   title: string;
   content: string;
   author: string;
-  position: string;
 }
 
 const testimonials: Testimonial[] = [
   {
     id: 1,
     rating: 5,
-    title: "Very professional and delivered a great product",
-    content: "The team was great to work with. They were very professional and delivered a great product. The renovation completely transformed our space.",
-    author: "Jeff B.",
-    position: "Small Business Owner"
+    title: "Kitchen",
+    content: "Great team work on time quality work , Highly recommend home of details Renovation. Nice work done in my kitchen",
+    author: "Manjinder Hari"
   },
   {
     id: 2,
     rating: 5,
-    title: "I would highly recommend them to anyone",
-    content: "I'm so happy with the way our renovation turned out. The team was a pleasure to work with and I would highly recommend them to anyone.",
-    author: "Keagan M.",
-    position: "Homeowner"
+    title: "Bathroom renovation",
+    content: "Hamza and his team are great they renovated my washroom upstairs and Im beyond happy with the results and quality of work and the companys professionalism was amazing.",
+    author: "HomeOwner"
   },
   {
     id: 3,
     rating: 5,
-    title: "Your team really did an amazing job",
-    content: "Thank you guys so much for all your hard work and attention to detail. Your team really did an amazing job.",
-    author: "Anthony B.",
-    position: "Founder of Big Guppy Media"
+    title: "Full home reno",
+    content: "I had a great experience with this company they did a full remodel for my house all 3 levels, they completely changed the entire house and through out the renovations communication was always great.",
+    author: "Omar Ibrahim"
   },
   {
     id: 4,
     rating: 5,
-    title: "They have really made my business turn into something great",
-    content: "The team really hit 5 plus stars when it comes to what they do! Great customer service and pay excellent attention to detail.",
-    author: "Jesse B.",
-    position: "West Cove Pools"
+    title: "Deck Build",
+    content: "Amazing service from Hamza and his team. Offered a more than fair price and was clean, quick and hardworking with his team.",
+    author: "Raahim Jalil"
   },
   {
     id: 5,
     rating: 5,
-    title: "Great company!",
-    content: "Great company! I knew I needed a renovation but had no idea how to go about designing it. They stepped in and took the charge. Would definitely recommend to anyone looking for quality work.",
-    author: "Vish P.",
-    position: "Founder of Vihaga"
+    title: "Basement Finishing",
+    content: "Dealing with Hamza was an absolute pleasure! Not only was the work completed in a timely manner, he was upfront regarding any potential issues and took care of the property start to finish.",
+    author: "Customer"
   },
   {
     id: 6,
     rating: 5,
-    title: "They made the whole process easy and enjoyable",
-    content: "The team was great from start to finish. I'm not too tech savvy but they made the whole process easy and enjoyable.",
-    author: "George W.",
-    position: "Market Development Manager"
+    title: "Basement Renovation",
+    content: "They transformed our basement beyond our wildest dream.They exhibit utmost professionalism, punctuality and dedication to deliver amazing result.",
+    author: "XOXO PRODUCTION"
   },
   {
     id: 7,
     rating: 5,
-    title: "Exceeded all expectations",
-    content: "From design to completion, they exceeded all expectations. Their craftsmanship and attention to detail is unmatched.",
-    author: "Rachel K.",
-    position: "Interior Designer"
+    title: "Basement renovation",
+    content: "We got a legal basement done from Hamza and his team, their customer service, quality, and transparency were all perfect. The project was done in timely manner.",
+    author: "HomeOwner"
   },
   {
     id: 8,
     rating: 5,
-    title: "Outstanding renovation experience",
-    content: "The entire renovation process was seamless. Their team's expertise and professionalism made our dream home a reality.",
-    author: "Mark S.",
-    position: "Burlington Resident"
+    title: "Basement renovation",
+    content: "Great work, very professionally done. Would communicate well, and take the time to explain everything. Very effective.",
+    author: "Customer"
   },
   {
     id: 9,
     rating: 5,
-    title: "Incredible transformation",
-    content: "They completely transformed our outdated space into something modern and beautiful. The attention to detail was impressive.",
-    author: "Linda M.",
-    position: "Home Owner"
+    title: "Bedroom remodel",
+    content: "The renovation was great! So organized and well managed! Got the job done perfectly. Perfectly done!",
+    author: "HomeOwner"
   },
   {
     id: 10,
     rating: 5,
-    title: "Highly recommend their services",
-    content: "Professional, punctual, and perfect execution. Would highly recommend their services to anyone looking for quality renovations.",
-    author: "Thomas R.",
-    position: "Property Manager"
+    title: "Washroom renovation",
+    content: "Hamza and his team renovated by washroom. Installed and rebuild the shower and water system. The work was clean . No messes nor junk was made or left behind after work.",
+    author: "Customer"
   }
 ];
 
@@ -121,9 +110,6 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
     <div>
       <p className="text-white font-semibold text-sm">
         {testimonial.author}
-      </p>
-      <p className="text-gray-500 text-sm">
-        {testimonial.position}
       </p>
     </div>
   </motion.div>
