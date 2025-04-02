@@ -1,23 +1,23 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const About = () => {
   const [currentImage, setCurrentImage] = useState(0);
 
   const images = [
     {
-      src: "services/custom-home.jpg",
-      alt: "Custom home renovation showcase"
+      src: "about/about-basement.jpg",
+      alt: "Finished basement renovation",
     },
     {
-      src: "services/kitchen.jpg",
-      alt: "Modern kitchen design"
+      src: "about/about-kitchen.jpg",
+      alt: "Modern kitchen design",
     },
     {
-      src: "services/bathroom.jpg",
-      alt: "Luxury bathroom renovation"
-    }
+      src: "about/about-bathroom.jpg",
+      alt: "Luxury bathroom renovation",
+    },
   ];
 
   // Auto-advance slideshow
@@ -39,16 +39,14 @@ const About = () => {
   const features = [
     {
       title: "Fully Licensed & Insured",
-      description: "All personnel involved in your project are fully licensed and insured for your peace of mind."
-    },
-    {
-      title: "No Hidden Costs",
-      description: "Transparency is key - we ensure there are never any hidden costs in our renovation services."
+      description:
+        "All personnel involved in your project are fully licensed and insured for your peace of mind.",
     },
     {
       title: "Transparent Process",
-      description: "We handle everything from project management to design collaboration with complete transparency."
-    }
+      description:
+        "We handle everything from project management to design collaboration with complete transparency.",
+    },
   ];
 
   return (
@@ -64,7 +62,7 @@ const About = () => {
             className="relative group"
           >
             <div className="aspect-[4/3] rounded-lg overflow-hidden bg-gray-900">
-              <AnimatePresence mode='wait'>
+              <AnimatePresence mode="wait">
                 <motion.img
                   key={currentImage}
                   src={images[currentImage].src}
@@ -105,7 +103,11 @@ const About = () => {
                   key={index}
                   onClick={() => setCurrentImage(index)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 
-                    ${index === currentImage ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/75'}`}
+                    ${
+                      index === currentImage
+                        ? "bg-white w-6"
+                        : "bg-white/50 hover:bg-white/75"
+                    }`}
                   aria-label={`Go to image ${index + 1}`}
                 />
               ))}
@@ -125,7 +127,7 @@ const About = () => {
                 transform hover:scale-105 transition-transform duration-300"
             >
               <div className="text-white">
-                <div className="text-3xl md:text-5xl font-bold mb-2">20+</div>
+                <div className="text-3xl md:text-5xl font-bold mb-2">5+</div>
                 <div className="text-[11px] md:text-sm opacity-90 font-medium">
                   Years of Excellence in Home Renovation
                 </div>
@@ -142,12 +144,14 @@ const About = () => {
             className="lg:pl-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              What You Should Know About House of Detailed Renovations
+              What You Should Know About Us
             </h2>
             <p className="text-gray-400 mb-8 text-lg leading-relaxed">
-              We believe our commitment to customer service sets us apart from other businesses in the industry. 
-              House of Detailed Renovations reigns dominant in home renovation services, you can always expect high-quality 
-              results backed by a team of dedicated professionals who put your needs first.
+              At Home of Detailed Renovations, we pride ourselves on exceptional
+              customer service and expertise in home renovations. Our dedicated
+              team transforms your spaces into beautiful, functional areas that
+              reflect your style. Trust us to bring your dream home to life with
+              quality craftsmanship.
             </p>
 
             <div className="space-y-8">
@@ -160,8 +164,10 @@ const About = () => {
                   transition={{ delay: 0.2 * index, duration: 0.5 }}
                   className="flex items-start space-x-6"
                 >
-                  <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[#ff0022]/10 flex items-center justify-center
-                    transform group-hover:scale-110 transition-transform duration-300">
+                  <div
+                    className="flex-shrink-0 w-14 h-14 rounded-full bg-[#ff0022]/10 flex items-center justify-center
+                    transform group-hover:scale-110 transition-transform duration-300"
+                  >
                     <Check className="w-7 h-7 text-[#ff0022]" />
                   </div>
                   <div>
@@ -182,4 +188,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;

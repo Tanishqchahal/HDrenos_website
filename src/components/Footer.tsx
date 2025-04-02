@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Facebook, Instagram} from 'lucide-react';
+import { Link } from "react-router-dom";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { FaTiktok, FaFacebookF, FaInstagram } from "react-icons/fa6";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,21 +9,15 @@ const Footer = () => {
     {
       icon: <Phone className="w-5 h-5" />,
       label: "Call Us",
-      value: "(123) 456-7890",
-      link: "tel:+11234567890"
+      value: "(647) 773-0963",
+      link: "tel:+11234567890",
     },
     {
       icon: <Mail className="w-5 h-5" />,
       label: "Email",
-      value: "info@houseofdetails.com",
-      link: "mailto:info@houseofdetails.com"
+      value: "homeofdetailedrenovations@gmail.com",
+      link: "mailto:homeofdetailedrenovations@gmail.com",
     },
-    {
-      icon: <MapPin className="w-5 h-5" />,
-      label: "Visit Us",
-      value: "123 Renovation Street, Burlington, ON L7L 6W6",
-      link: "https://maps.google.com"
-    }
   ];
 
   const quickLinks = [
@@ -30,29 +25,33 @@ const Footer = () => {
     { name: "About Us", path: "/about" },
     { name: "Services", path: "/services" },
     { name: "Testimonials", path: "/testimonials" },
-    { name: "Contact", path: "/contact" }
   ];
 
   const services = [
-    { name: "Custom Home Renovations", path: "/services/custom-home" },
+    { name: "Remodeling", path: "/services/remodeling" },
     { name: "Kitchen Renovations", path: "/services/kitchen" },
     { name: "Bathroom Renovations", path: "/services/bathroom" },
-    { name: "Custom Builds", path: "/services/custom-builds" },
-    { name: "Home Additions", path: "/services/additions" },
-    { name: "Commercial Renovations", path: "/services/commercial" }
+    { name: "Basement", path: "/services/basement" },
+    { name: "Custom Home Renovations", path: "/services/custom-home" },
+    { name: "Commercial Renovations", path: "/services/commercial" },
   ];
 
   const socialLinks = [
     {
-      icon: Facebook,
+      icon: FaFacebookF,
       href: "https://facebook.com",
-      label: "Follow us on Facebook"
+      label: "Follow us on Facebook",
     },
     {
-      icon: Instagram,
+      icon: FaInstagram,
       href: "https://instagram.com",
-      label: "Follow us on Instagram"
-    }
+      label: "Follow us on Instagram",
+    },
+    {
+      icon: FaTiktok,
+      href: "https://tiktok.com",
+      label: "Follow us on Instagram",
+    },
   ];
 
   return (
@@ -63,14 +62,15 @@ const Footer = () => {
           {/* Logo and About */}
           <div className="space-y-6">
             <Link to="/">
-              <img 
-                src="/logo.png" 
-                alt="House of Detailed Renovations Logo" 
+              <img
+                src="/logo.png"
+                alt="House of Detailed Renovations Logo"
                 className="h-20 w-auto object-contain"
               />
             </Link>
             <p className="text-gray-400 leading-relaxed">
-              Transforming houses into dream homes with quality craftsmanship and attention to detail.
+              Transforming houses into dream homes with quality craftsmanship
+              and attention to detail.
             </p>
             {/* Social Links */}
             <div className="flex space-x-4">
@@ -92,11 +92,13 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white text-lg font-semibold mb-6">Quick Links</h3>
+            <h3 className="text-white text-lg font-semibold mb-6">
+              Quick Links
+            </h3>
             <ul className="space-y-4">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link 
+                  <Link
                     to={link.path}
                     className="text-gray-400 hover:text-[#ff0022] transition-colors duration-200"
                   >
@@ -109,11 +111,13 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-white text-lg font-semibold mb-6">Our Services</h3>
+            <h3 className="text-white text-lg font-semibold mb-6">
+              Our Services
+            </h3>
             <ul className="space-y-4">
               {services.map((service) => (
                 <li key={service.name}>
-                  <Link 
+                  <Link
                     to={service.path}
                     className="text-gray-400 hover:text-[#ff0022] transition-colors duration-200"
                   >
@@ -126,7 +130,9 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-white text-lg font-semibold mb-6">Contact Us</h3>
+            <h3 className="text-white text-lg font-semibold mb-6">
+              Contact Us
+            </h3>
             <ul className="space-y-4">
               {contactInfo.map((item, index) => (
                 <li key={index}>
@@ -134,7 +140,11 @@ const Footer = () => {
                     href={item.link}
                     className="group flex items-start space-x-3 text-gray-400 hover:text-[#ff0022] transition-colors duration-200"
                     target={item.icon.type === MapPin ? "_blank" : undefined}
-                    rel={item.icon.type === MapPin ? "noopener noreferrer" : undefined}
+                    rel={
+                      item.icon.type === MapPin
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
                   >
                     <span className="mt-1 group-hover:text-[#ff0022] transition-colors duration-200">
                       {item.icon}
@@ -158,22 +168,9 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {currentYear} House of Detailed Renovations. All rights reserved.
+              © {currentYear} House of Detailed Renovations. All rights
+              reserved.
             </p>
-            <div className="flex space-x-6">
-              <Link 
-                to="/privacy-policy"
-                className="text-gray-400 hover:text-[#ff0022] text-sm transition-colors duration-200"
-              >
-                Privacy Policy
-              </Link>
-              <Link 
-                to="/terms-of-service"
-                className="text-gray-400 hover:text-[#ff0022] text-sm transition-colors duration-200"
-              >
-                Terms of Service
-              </Link>
-            </div>
           </div>
         </div>
       </div>
@@ -181,4 +178,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;

@@ -10,22 +10,22 @@ interface SlideData {
 
 const slides: SlideData[] = [
   {
-    image: '/hero-1.jpg',
+    image: 'hero/hero-1.jpg',
     title: 'Transform Your Space',
     description: 'Expert renovation services that turn your dream home into reality',
   },
   {
-    image: '/hero-2.jpg',
+    image: 'hero/hero-2.jpg',
     title: 'Quality Craftsmanship',
     description: 'Premium materials and skilled artisans for exceptional results',
   },
   {
-    image: '/hero-3.jpg',
+    image: 'hero/hero-3.jpg',
     title: 'Modern Solutions',
     description: 'Innovative designs meeting contemporary living standards',
   },
   {
-    image: '/hero-4.jpg',
+    image: 'hero/hero-4.jpg',
     title: 'Complete Home Makeover',
     description: 'From concept to completion, we handle every detail',
   },
