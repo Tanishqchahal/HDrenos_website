@@ -1,17 +1,17 @@
-import Hero from '../components/Hero';
-import Steps from '../components/Steps';
+import HeroWithSteps from '../components/HeroWithSteps';
 import About from '../components/About';
 import Services from '../components/Services';
 import FAQ from '../components/FAQ';
+import TestimonialsPage from './TestimonialsPage';
 
 const Home = () => {
   return (
     <>
-      <Hero />
-      <Steps />
+      <HeroWithSteps />
       <About />
       <Services />
       <FAQ />
+      <TestimonialsPage />
     </>
   );
 };

@@ -28,11 +28,10 @@ const Footer = () => {
   ];
 
   const services = [
-    { name: "Remodeling", path: "/services/remodeling" },
     { name: "Kitchen Renovations", path: "/services/kitchen" },
     { name: "Bathroom Renovations", path: "/services/bathroom" },
-    { name: "Basement", path: "/services/basement" },
-    { name: "Custom Home Renovations", path: "/services/custom-home" },
+    { name: "Basement Renovations", path: "/services/basement" },
+    { name: "Custom Home Renovations", path: "/services/remodeling" },
     { name: "Commercial Renovations", path: "/services/commercial" },
   ];
 

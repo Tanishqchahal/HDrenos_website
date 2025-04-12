@@ -29,18 +29,6 @@ const faqs: FAQItem[] = [
     question: "What happens if unexpected issues arise during construction?",
     answer: "Sometimes hidden issues (e.g., outdated wiring or structural damage) are discovered during renovations. If this happens, we'll inform you immediately, present solutions, and adjust the plan with your approval."
   },
-  {
-    question: "Do you offer design services?",
-    answer: "Yes! Our team includes experienced designers who will help you choose layouts, materials, colors, and finishes that match your style and budget."
-  },
-  {
-    question: "How do I communicate with your team during the project?",
-    answer: "You'll have a dedicated project manager who will serve as your main point of contact. They'll provide regular updates and be available to address any questions or concerns."
-  },
-  {
-    question: "Can I make changes once construction has started?",
-    answer: "Yes, but changes may affect the timeline and budget. We'll discuss any adjustments with you before implementing them to avoid surprises."
-  }
 ];
 
 const FAQ = () => {

@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 
 interface ServiceProcess {
   step: number;
@@ -17,6 +17,7 @@ interface ServiceDetails {
   images: string[];
   process: ServiceProcess[];
   features: string[];
+  faqs: { question: string; answer: string }[];
 }
 
 const servicesData: { [key: string]: ServiceDetails } = {
@@ -67,6 +68,20 @@ const servicesData: { [key: string]: ServiceDetails } = {
       "Backsplash and tile work",
       "Island design and installation",
     ],
+    faqs: [
+      {
+        question: "How much does a kitchen renovation cost?",
+        answer: "Kitchen renovation costs depend on the scope and size of your project. We offer competitive prices and provide a detailed estimate in advance. Factors affecting cost include material quality, appliance selection, layout changes, and custom features. We work with you to create a renovation plan that fits your budget while achieving your vision."
+      },
+      {
+        question: "How long does a typical kitchen renovation take?",
+        answer: "A typical kitchen renovation takes 4-8 weeks, depending on the scope of work, material selections, and any unforeseen issues discovered during demolition. We provide a detailed timeline during our initial consultation."
+      },
+      {
+        question: "What types of materials do you use for kitchen renovations?",
+        answer: "We use high-quality, durable materials from trusted suppliers. Options include custom hardwood or manufactured cabinetry, quartz, granite, or marble countertops, ceramic, porcelain, or glass tile backsplashes, and premium flooring materials. We select products that balance aesthetics, functionality, and longevity."
+      }
+    ]
   },
   bathroom: {
     id: "bathroom",
@@ -116,6 +131,20 @@ const servicesData: { [key: string]: ServiceDetails } = {
       "Heated flooring options",
       "Water-efficient fixtures",
     ],
+    faqs: [
+      {
+        question: "What is the cost of a bathroom renovation?",
+        answer: "Bathroom renovation costs vary based on the size and scope of your project. We provide comprehensive estimates upfront with no hidden fees. Factors affecting price include fixture quality, tile selection, vanity type, and any plumbing or electrical changes. Our team works with you to maximize value while staying within your budget."
+      },
+      {
+        question: "How long does a bathroom renovation take?",
+        answer: "A typical bathroom renovation takes 2-4 weeks for a standard bathroom and 4-6 weeks for a master bathroom, depending on the complexity of the project and material availability."
+      },
+      {
+        question: "What materials do you use for bathroom renovations?",
+        answer: "We use premium, moisture-resistant materials specifically designed for bathroom environments. This includes porcelain and ceramic tiles, natural stone, waterproof shower systems, quality fixtures from trusted brands, solid surface or stone countertops, and water-resistant cabinetry. All materials are selected for durability, performance, and style."
+      }
+    ]
   },
   basement: {
     id: "basement",
@@ -165,10 +194,24 @@ const servicesData: { [key: string]: ServiceDetails } = {
       "Home office setups",
       "Storage solutions",
     ],
+    faqs: [
+      {
+        question: "How much does a basement renovation cost?",
+        answer: "Basement renovation costs depend on the square footage, current condition, and your desired finishes. We provide detailed estimates after assessing your space. Factors that influence cost include plumbing additions, electrical work, wall framing, flooring choices, and specialty features like bars or entertainment systems. We can work with various budgets to create valuable living space."
+      },
+      {
+        question: "How long does a typical basement renovation take?",
+        answer: "Most basement renovations take 4-12 weeks to complete, depending on the scope and complexity of the project. Factors affecting timeline include required waterproofing, plumbing or electrical work, and the overall size of the space. We provide a detailed schedule at the beginning of your project."
+      },
+      {
+        question: "What materials do you use for basement renovations?",
+        answer: "We use moisture-resistant and durable materials designed specifically for below-grade spaces. This includes specialized wall systems, waterproof flooring options like luxury vinyl plank or engineered hardwood, mold-resistant drywall, and proper insulation. Our material selections are chosen to withstand the unique conditions of basement environments while providing beautiful finishes."
+      }
+    ]
   },
   remodeling: {
     id: "remodeling",
-    title: "Remodeling",
+    title: "Custom Home Renovations",
     description: "Transforming your living space with style",
     longDescription: `Transform your living space with our expertly planned and executed remodeling services. We ensure seamless integration with your existing home while enhancing functionality and aesthetics to create a space that reflects your style and needs.`,
     images: [
@@ -205,14 +248,28 @@ const servicesData: { [key: string]: ServiceDetails } = {
     ],
     features: [
       "Custom design solutions",
-      "High-quality materials",
-      "Decking and fencing solutions ",
-      "Energy-efficient upgrades",
-      "Smart home features",
+      "Home Additions",
+      "Expanding an existing space",
+      "New Builds",
+      "Rental Units",
+      "Decking and fencing solutions",
       "Storage solutions",
-      "Aesthetic improvements",
-      "Epoxy flooring",
+      "Modern Flooring",
     ],
+    faqs: [
+      {
+        question: "What does a custom home renovation cost?",
+        answer: "Custom home renovation costs vary widely based on the scope, size, and complexity of your project. We provide detailed, transparent estimates after understanding your specific needs. Pricing factors include structural changes, square footage, quality of materials, fixtures, and custom features. We work with you to develop a renovation plan that aligns with your budget while delivering exceptional value."
+      },
+      {
+        question: "How long does a custom home renovation take?",
+        answer: "Timeline varies by project scope, typically ranging from 8-20 weeks. Factors affecting duration include permit approvals, structural changes, material availability, and project complexity. We create a detailed timeline specific to your project during the planning phase."
+      },
+      {
+        question: "What materials do you use for custom home renovations?",
+        answer: "We select materials based on quality, durability, aesthetics, and value. Our team sources from trusted suppliers and can accommodate various preferences from eco-friendly options to luxury finishes. We present material options during the design phase, considering factors like maintenance requirements, longevity, and overall design cohesion for your specific project."
+      }
+    ]
   },
   commercial: {
     id: "commercial",
@@ -261,12 +318,27 @@ const servicesData: { [key: string]: ServiceDetails } = {
       "HVAC modernization",
       "Security integration",
     ],
+    faqs: [
+      {
+        question: "What is the cost of a commercial renovation?",
+        answer: "Commercial renovation costs depend on the size of your space, scope of work, and quality of finishes. We provide comprehensive estimates that include permits, materials, labor, and project management. Factors affecting cost include building code requirements, specialized systems, and business-specific features. We work within your budget constraints while ensuring quality results that enhance your business operations."
+      },
+      {
+        question: "How long does a commercial renovation project take?",
+        answer: "Commercial renovation timelines typically range from 4-16 weeks depending on project size and complexity. We develop strategic phasing plans to minimize business disruption and create realistic schedules that account for permitting, material lead times, and any specialized installations required for your business."
+      },
+      {
+        question: "What type of commercial renovation do you specialize in?",
+        answer: "We specialize in a wide range of commercial renovations including bars and restaurants, entertainment centers, office spaces, retail stores, medical facilities, and many more. Our team has extensive experience adapting to the unique requirements of different business environments, ensuring that each renovation enhances functionality while creating an appealing atmosphere for both customers and employees."
+      }
+    ]
   },
 };
 
 const ServiceDetail = () => {
   const { serviceId } = useParams();
   const [currentImage, setCurrentImage] = useState(0);
+  const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
   const service = servicesData[serviceId || ""];
 
   if (!service) {
@@ -408,6 +480,63 @@ const ServiceDetail = () => {
                 className="bg-gray-900/50 rounded-lg p-6 backdrop-blur-sm border border-gray-800"
               >
                 <p className="text-gray-300">{feature}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* FAQ Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-20"
+        >
+          <h2 className="text-3xl font-bold text-white mb-12 text-center">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4 max-w-4xl mx-auto">
+            {service.faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="border border-gray-800 rounded-lg overflow-hidden"
+              >
+                <button
+                  onClick={() => setActiveFaqIndex(activeFaqIndex === index ? null : index)}
+                  className="w-full px-6 py-4 flex items-center justify-between bg-gray-900/50 hover:bg-gray-900 transition-colors duration-200"
+                >
+                  <span className="text-left text-lg font-medium text-white">
+                    {faq.question}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: activeFaqIndex === index ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="w-5 h-5 text-[#ff0022]" />
+                  </motion.div>
+                </button>
+                
+                <AnimatePresence>
+                  {activeFaqIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      <div className="px-6 py-4 bg-gray-900/30">
+                        <p className="text-gray-400 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>

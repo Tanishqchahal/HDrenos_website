@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 interface Testimonial {
   id: number;
@@ -116,8 +116,9 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
 );
 
 const TestimonialsPage = () => {
-  const [position, setPosition] = useState(-300);
+  const [position, setPosition] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const columnHeights = useRef<number[]>([0, 0, 0]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -128,26 +129,52 @@ const TestimonialsPage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Calculate the column heights once testimonials are rendered
+  useEffect(() => {
+    if (isMobile) return;
+
+    // Small delay to ensure DOM is populated
+    const timer = setTimeout(() => {
+      const columns = document.querySelectorAll('.testimonial-column');
+      columns.forEach((column, index) => {
+        const columnContent = column.querySelector('.column-content');
+        if (columnContent) {
+          columnHeights.current[index] = columnContent.scrollHeight / 2;
+        }
+      });
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [isMobile]);
+
+  // Infinite scroll effect
   useEffect(() => {
     if (isMobile) return;
 
     const interval = setInterval(() => {
       setPosition(prev => {
-        if (Math.abs(prev) > 10000) {
-          return -300;
+        const newPosition = prev - 0.5;
+        // Creating infinite loop effect by resetting position when it exceeds half the content height
+        if (Math.abs(newPosition) >= Math.max(...columnHeights.current)) {
+          return 0;
         }
-        return prev - 0.5;
+        return newPosition;
       });
     }, 20);
 
     return () => clearInterval(interval);
   }, [isMobile]);
 
-  const columns = [
-    [...testimonials.slice(0, 4), ...testimonials.slice(0, 4)],
-    [...testimonials.slice(4, 7), ...testimonials.slice(4, 7)],
-    [...testimonials.slice(7, 10), ...testimonials.slice(7, 10)]
-  ];
+  const prepareColumns = () => {
+    return [
+      // Duplicate all testimonials to create a seamless loop
+      [...testimonials.slice(0, 4), ...testimonials.slice(0, 4)],
+      [...testimonials.slice(4, 7), ...testimonials.slice(4, 7), ...testimonials.slice(4, 7)],
+      [...testimonials.slice(7, 10), ...testimonials.slice(7, 10), ...testimonials.slice(7, 10)]
+    ];
+  };
+
+  const columns = prepareColumns();
 
   return (
     <div className="pt-28 px-4 bg-black min-h-screen overflow-hidden">
@@ -181,11 +208,13 @@ const TestimonialsPage = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
               {columns.map((column, columnIndex) => (
-                <div key={columnIndex} className="relative overflow-hidden h-full">
+                <div key={columnIndex} className="relative overflow-hidden h-full testimonial-column">
                   <div
-                    className="absolute w-full transition-transform duration-[2000ms] ease-linear"
+                    className="absolute w-full column-content"
                     style={{
                       transform: `translateY(${position * (columnIndex % 2 === 0 ? 1 : 1.2)}px)`,
+                      transition: position === 0 ? 'none' : 'transform linear',
+                      willChange: 'transform'
                     }}
                   >
                     {column.map((testimonial, index) => (

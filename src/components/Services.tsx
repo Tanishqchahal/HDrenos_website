@@ -28,7 +28,7 @@ const services: Service[] = [
     id: "bathroom",
   },
   {
-    title: "Basement",
+    title: "Basement Renovations",
     description:
       "Transform your unused basement into a functional and stylish space.",
     image: "/services/basement/basement-4.jpeg",
@@ -44,7 +44,7 @@ const services: Service[] = [
     id: "remodeling",
   },
   {
-    title: "Commercial",
+    title: "Commercial Renovations",
     description:
       "Professional renovations for businesses and commercial spaces.",
     image: "/services/commercial.jpg",
@@ -53,7 +53,7 @@ const services: Service[] = [
   },
 ];
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 const Services = () => {
   const containerVariants = {
