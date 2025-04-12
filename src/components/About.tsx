@@ -7,16 +7,16 @@ const About = () => {
 
   const images = [
     {
-      src: "about/about-basement.jpg",
-      alt: "Finished basement renovation",
-    },
-    {
       src: "about/about-kitchen.jpg",
       alt: "Modern kitchen design",
     },
     {
       src: "about/about-bathroom.jpg",
       alt: "Luxury bathroom renovation",
+    },
+    {
+      src: "about/about-basement.jpg",
+      alt: "Finished basement renovation",
     },
   ];
 

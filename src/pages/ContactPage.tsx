@@ -119,45 +119,20 @@ const ContactPage = () => {
             {/* First Image */}
             <div className="aspect-[4/3] rounded-lg overflow-hidden relative group">
               <img
-                src="/services/custom-home.jpg"
+                src="contact1.jpg"
                 alt="Luxury home renovation"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              {/* Overlay with text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                <div className="p-6">
-                  <h3 className="text-white text-xl font-bold">Luxury Home Renovations</h3>
-                  <p className="text-gray-200 mt-2">Transforming homes with exceptional craftsmanship</p>
-                </div>
-              </div>
             </div>
 
             {/* Second Image */}
             <div className="aspect-[4/3] rounded-lg overflow-hidden relative group">
               <img
-                src="/services/kitchen.jpg"
+                src="/services/bathroom/bathroom-2.jpeg"
                 alt="Modern kitchen design"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              {/* Overlay with text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                <div className="p-6">
-                  <h3 className="text-white text-xl font-bold">Award-Winning Designs</h3>
-                  <p className="text-gray-200 mt-2">Creating spaces that inspire and delight</p>
-                </div>
-              </div>
-            </div>
 
-            {/* Why Choose Us Section */}
-            <div className="bg-gray-900/50 p-8 rounded-lg">
-              <h2 className="text-2xl font-bold text-white mb-4">Why Choose Us?</h2>
-              <ul className="space-y-4 text-gray-400">
-                <li>✓ Free Initial Consultation</li>
-                <li>✓ Expert Design Team</li>
-                <li>✓ Quality Craftsmanship</li>
-                <li>✓ Project Management Excellence</li>
-                <li>✓ Transparent Pricing</li>
-              </ul>
             </div>
           </motion.div>
 
