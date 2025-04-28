@@ -47,7 +47,7 @@ const services: Service[] = [
     title: "Commercial Renovations",
     description:
       "Professional renovations for businesses and commercial spaces.",
-    image: "/projects/aerosports_project2.jpg",
+    image: "/projects/k1_project.avif",
     link: "#commercial",
     id: "commercial",
   },

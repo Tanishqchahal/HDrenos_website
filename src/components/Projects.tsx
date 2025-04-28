@@ -17,17 +17,17 @@ const projects: Project[] = [
     title: "K1 Speed",
     description:
       "Complete construction of a new indoor go-karting facility from the ground up, including professional-grade track design, safety systems, and modern amenities for racers and spectators.",
-    image: "/projects/k1_project.png",
-    features: ["Custom track construction", "Spectator viewing areas", "Racer lounge and facilities"],
+    image: "/projects/k1_project.avif",
+    features: ["Custom track construction", "Racer lounge and facilities", "Kitchen and bar area", "Audio and visual system installation", "Network, Internet and Storage solutions", "Siding and fascia installation"],
     year: "2025",
   },
   {
     id: 2,
-    title: "Aerosports Trampoline Park",
+    title: "Aerosports Trampoline Park, Oakville",
     description:
-      "Complete construction of a large-scale trampoline park facility, including specialized jumping areas, foam pits, and comprehensive safety systems throughout the venue.",
+      "Complete renovation of an expansive trampoline park, incorporating extended jumping surfaces, LED display systems, enhanced safety infrastructure, designer wall coverings, and sophisticated lighting arrangements throughout the facility.",
     image: "/projects/aerosport_projects.png",
-    features: ["Multiple trampoline zones", "Foam pit installation", "Safety padding systems", "Spectator areas", "Custom obstacle courses"],
+    features: ["Trampoline floor extension", "Multi-screen LED Installation", "Safety padding systems", "Wallpaper Installation", "Carpet and flooring", "Lighting Installation"],
     year: "2024",
   },
 ];

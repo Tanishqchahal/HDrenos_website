@@ -7,6 +7,12 @@ const Footer = () => {
 
   const contactInfo = [
     {
+      icon: <MapPin className="w-5 h-5" />,
+      label: "Location",
+      value: "2558 Ambercroft Trail, Mississauga, ON L5B 2C3",
+      link: "https://www.google.com/maps/place/2558+Ambercroft+Trail,+Mississauga,+ON+L5B+2C3",
+    },
+    {
       icon: <Phone className="w-5 h-5" />,
       label: "Call Us",
       value: "(647) 773-0963",
@@ -73,7 +79,7 @@ const Footer = () => {
               and attention to detail.
             </p>
             {/* Social Links */}
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
@@ -87,7 +93,7 @@ const Footer = () => {
                   <social.icon className="w-5 h-5 text-gray-400 group-hover:text-white" />
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}
