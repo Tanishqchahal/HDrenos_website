@@ -277,10 +277,8 @@ const servicesData: { [key: string]: ServiceDetails } = {
     description: "Professional space transformations",
     longDescription: `We specialize in commercial renovations that enhance functionality and aesthetics while minimizing business disruption. Our team understands the unique requirements of commercial spaces and delivers results that improve both employee productivity and client experience.`,
     images: [
-      "/services/commercial.jpg",
-      "/services/commercial-2.jpg",
-      "/services/commercial-3.jpg",
-      "/services/commercial-4.jpg",
+      "/projects/k1_project.png",
+      "/projects/aerosport_projects.png",
     ],
     process: [
       {

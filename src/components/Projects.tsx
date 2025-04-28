@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Project {
   id: number;
@@ -8,40 +8,27 @@ interface Project {
   description: string;
   image: string;
   features: string[];
-  client: string;
   year: string;
 }
 
 const projects: Project[] = [
   {
     id: 1,
-    title: "Modern Kitchen Transformation",
+    title: "K1 Speed",
     description:
-      "Complete renovation of a dated kitchen into a modern, open-concept space with premium finishes and smart home integration.",
-    image: "/services/kitchen/kitchen-4.jpeg",
-    features: ["Custom cabinetry", "Quartz countertops", "Smart appliances", "LED lighting"],
-    client: "Johnson Family",
-    year: "2023",
+      "Complete construction of a new indoor go-karting facility from the ground up, including professional-grade track design, safety systems, and modern amenities for racers and spectators.",
+    image: "/projects/k1_project.png",
+    features: ["Custom track construction", "Spectator viewing areas", "Racer lounge and facilities"],
+    year: "2025",
   },
   {
     id: 2,
-    title: "Luxury Bathroom Remodel",
+    title: "Aerosports Trampoline Park",
     description:
-      "Full bathroom renovation featuring spa-inspired design elements with high-end materials and water-saving fixtures.",
-    image: "/services/bathroom/bathroom-4.jpeg",
-    features: ["Heated floors", "Walk-in shower", "Freestanding tub", "Custom tile work"],
-    client: "Williams Residence",
-    year: "2022",
-  },
-  {
-    id: 3,
-    title: "Basement Entertainment Space",
-    description:
-      "Transformation of an unfinished basement into a multi-functional entertainment area with home theater and wet bar.",
-    image: "/services/basement/basement-4.jpeg",
-    features: ["Home theater", "Custom wet bar", "Game area", "Climate control"],
-    client: "Parker Family",
-    year: "2023",
+      "Complete construction of a large-scale trampoline park facility, including specialized jumping areas, foam pits, and comprehensive safety systems throughout the venue.",
+    image: "/projects/aerosport_projects.png",
+    features: ["Multiple trampoline zones", "Foam pit installation", "Safety padding systems", "Spectator areas", "Custom obstacle courses"],
+    year: "2024",
   },
 ];
 
@@ -176,10 +163,6 @@ const Projects = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 }}
                 >
-                  <div>
-                    <p className="text-gray-400 text-sm">Client</p>
-                    <p className="font-medium">{projects[currentProject].client}</p>
-                  </div>
                   <div>
                     <p className="text-gray-400 text-sm">Year</p>
                     <p className="font-medium">{projects[currentProject].year}</p>

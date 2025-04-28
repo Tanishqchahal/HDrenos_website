@@ -4,10 +4,10 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
-import TestimonialsPage from './pages/TestimonialsPage';
 import ContactPage from './pages/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 import ServiceDetail from './pages/ServiceDetail';
+import Projects from './components/Projects';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:serviceId" element={<ServiceDetail />} />
-          <Route path="/testimonials" element={<TestimonialsPage />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
