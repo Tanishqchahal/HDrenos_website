@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hdrenos.com/sitemap.xml 
