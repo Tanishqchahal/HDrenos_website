@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { FaPhone } from 'react-icons/fa';
 
 const ContactPage = () => {
   const projectTypes = [
@@ -107,6 +108,30 @@ const ContactPage = () => {
         >
           Get In Touch
         </motion.h1>
+
+        {/* Call CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="bg-gray-900/50 border border-gray-800 rounded-lg p-6 mb-12 flex flex-col md:flex-row items-center justify-between"
+        >
+          <div className="flex items-center mb-4 md:mb-0">
+            <FaPhone className="text-[#ff0022] mr-3 text-2xl" />
+            <div>
+              <h3 className="text-white text-xl font-semibold">Prefer to talk?</h3>
+              <p className="text-gray-300">We're just a phone call away</p>
+            </div>
+          </div>
+          <a 
+            href="tel:+16477730963" 
+            className="inline-flex items-center bg-[#ff0022] hover:bg-[#cc001b] text-white px-6 py-3 rounded-md 
+              font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,0,34,0.3)]"
+          >
+            <FaPhone className="mr-2" />
+            Call at (647) 773-0963
+          </a>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Image Section */}
